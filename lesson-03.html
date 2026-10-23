@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الدرس 03: المتغيرات وأنواع البيانات | Medo El Jan</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    html, body { background: #0a0e17 !important; color: #f1f5f9 !important; font-family: Cairo, Tahoma, Arial, sans-serif; direction: rtl; margin: 0; }
+    a { color: #00d4ff; }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">Medo El Jan</span></div>
+    <nav class="sidebar-nav">
+      <a href="./index.html" class="nav-item"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
+      <a href="./programming.html" class="nav-item"><i class="fas fa-code"></i> <span>عالم البرمجة</span></a>
+      <a href="./index.html" class="nav-item active"><i class="fas fa-book"></i> <span>دروس Python</span></a>
+    </nav>
+  </aside>
+  <div class="main-wrapper">
+    <header class="top-header">
+      <div class="user-info"><div class="user-avatar">م</div><div><div class="user-name">Medo Eljan</div></div></div>
+    </header>
+    <div class="lesson-page">
+      <div class="lesson-header">
+        <h1>الدرس 03: المتغيرات وأنواع البيانات الأساسية</h1>
+        <div class="meta"><span>🐍 Python</span><span>⏱️ 30 دقيقة</span><span>📊 مبتدئ</span><span>📝 10 أسئلة</span></div>
+      </div>
+      <div class="lesson-content">
+        <p>المتغيرات هي صناديق نضع فيها البيانات لنستخدمها لاحقاً في البرنامج. في هذا الدرس سنتعلم كيف ننشئ المتغيرات وما هي أنواع البيانات الأساسية في Python.</p>
+
+        <h2>1. ما هو المتغير؟</h2>
+        <p>المتغير هو اسم يشير إلى قيمة مخزنة في ذاكرة الحاسوب. يمكنك تخيل أنه صندوق له اسم، وتضع بداخله شيئاً (رقماً أو نصاً أو أي شيء).</p>
+        <pre>name = "Medo"
+age = 25
+height = 1.75
+is_student = True</pre>
+
+        <h2>2. قواعد تسمية المتغيرات</h2>
+        <p>- يجب أن يبدأ بحرف أو شرطة سفلية _<br>
+        - يمكن أن يحتوي على حروف وأرقام وشرطة سفلية فقط<br>
+        - لا يمكن أن يبدأ برقم<br>
+        - لا يمكن استخدام الكلمات المحجوزة مثل if, for, print<br>
+        - Python حساسة لحالة الأحرف (name تختلف عن Name)</p>
+        <pre># صحيحة
+user_name = "أحمد"
+_age = 20
+score2 = 95
+
+# خاطئة
+2score = 95      # يبدأ برقم
+user-name = "أحمد"  # يحتوي على شرطة</pre>
+
+        <h2>3. أنواع البيانات الأساسية</h2>
+        <p><strong>1. الأعداد الصحيحة (int)</strong></p>
+        <pre>x = 10
+y = -5
+print(type(x))  # &lt;class 'int'&gt;</pre>
+
+        <p><strong>2. الأعداد العشرية (float)</strong></p>
+        <pre>pi = 3.14
+price = 19.99
+print(type(pi))  # &lt;class 'float'&gt;</pre>
+
+        <p><strong>3. النصوص (str)</strong></p>
+        <pre>message = "مرحباً بالعالم"
+letter = 'A'
+print(type(message))  # &lt;class 'str'&gt;</pre>
+
+        <p><strong>4. القيم المنطقية (bool)</strong></p>
+        <pre>is_active = True
+is_admin = False
+print(type(is_active))  # &lt;class 'bool'&gt;</pre>
+
+        <h2>4. معرفة نوع المتغير</h2>
+        <p>استخدم الدالة type() لمعرفة نوع أي متغير:</p>
+        <pre>print(type(100))
+print(type(3.14))
+print(type("نص"))
+print(type(True))</pre>
+
+        <h2>5. التحويل بين الأنواع</h2>
+        <pre>num_str = "50"
+num_int = int(num_str)      # نص → رقم صحيح
+num_float = float(num_str)  # نص → رقم عشري
+text = str(100)             # رقم → نص
+print(num_int + 10)         # 60</pre>
+
+        <h2>6. مثال عملي</h2>
+        <pre>print("=== بيانات الطالب ===")
+student_name = input("اسم الطالب: ")
+student_age = int(input("عمر الطالب: "))
+student_gpa = float(input("المعدل: "))
+is_passed = student_gpa >= 2.0
+
+print("--------------------")
+print("الاسم:", student_name)
+print("العمر:", student_age)
+print("المعدل:", student_gpa)
+print("ناجح؟", is_passed)</pre>
+
+        <h2>ملخص</h2>
+        <p>تعلمنا كيف ننشئ المتغيرات، قواعد تسميتها، والأنواع الأساسية الأربعة (int, float, str, bool)، وكيفية التحويل بينها. هذه المفاهيم أساسية جداً وستستخدمها في كل درس قادم.</p>
+      </div>
+
+      <div class="questions-section">
+        <h2>📝 الأسئلة (10 أسئلة)</h2>
+        <div class="question"><h4>1. ما هو المتغير في البرمجة؟</h4>
+          <label><input type="radio" name="q1"> اسم يشير إلى قيمة مخزنة في الذاكرة</label>
+          <label><input type="radio" name="q1"> نوع من أنواع الأخطاء</label>
+          <label><input type="radio" name="q1"> دالة جاهزة</label>
+          <label><input type="radio" name="q1"> مكتبة خارجية</label></div>
+        <div class="question"><h4>2. أي من التالي اسم متغير صحيح؟</h4>
+          <label><input type="radio" name="q2"> 2name</label>
+          <label><input type="radio" name="q2"> user-name</label>
+          <label><input type="radio" name="q2"> user_name</label>
+          <label><input type="radio" name="q2"> for</label></div>
+        <div class="question"><h4>3. ما نوع البيانات في: x = 3.14؟</h4>
+          <label><input type="radio" name="q3"> int</label>
+          <label><input type="radio" name="q3"> float</label>
+          <label><input type="radio" name="q3"> str</label>
+          <label><input type="radio" name="q3"> bool</label></div>
+        <div class="question"><h4>4. ما نوع البيانات في: flag = True؟</h4>
+          <label><input type="radio" name="q4"> int</label>
+          <label><input type="radio" name="q4"> str</label>
+          <label><input type="radio" name="q4"> bool</label>
+          <label><input type="radio" name="q4"> float</label></div>
+        <div class="question"><h4>5. كيف تعرف نوع أي متغير؟</h4>
+          <label><input type="radio" name="q5"> type()</label>
+          <label><input type="radio" name="q5"> typeof()</label>
+          <label><input type="radio" name="q5"> class()</label>
+          <label><input type="radio" name="q5"> info()</label></div>
+        <div class="question"><h4>6. ماذا يفعل int("25")؟</h4>
+          <label><input type="radio" name="q6"> يحول النص "25" إلى الرقم 25</label>
+          <label><input type="radio" name="q6"> يحول الرقم إلى نص</label>
+          <label><input type="radio" name="q6"> يحدث خطأ</label>
+          <label><input type="radio" name="q6"> لا يفعل شيئاً</label></div>
+        <div class="question"><h4>7. هل Python حساسة لحالة الأحرف؟</h4>
+          <label><input type="radio" name="q7"> نعم (name تختلف عن Name)</label>
+          <label><input type="radio" name="q7"> لا</label>
+          <label><input type="radio" name="q7"> أحياناً فقط</label>
+          <label><input type="radio" name="q7"> حسب النظام</label></div>
+        <div class="question"><h4>8. أي من التالي كلمة محجوزة لا يمكن استخدامها كاسم متغير؟</h4>
+          <label><input type="radio" name="q8"> name</label>
+          <label><input type="radio" name="q8"> if</label>
+          <label><input type="radio" name="q8"> age</label>
+          <label><input type="radio" name="q8"> score</label></div>
+        <div class="question"><h4>9. ما نتيجة: print(type("100"))؟</h4>
+          <label><input type="radio" name="q9"> &lt;class 'int'&gt;</label>
+          <label><input type="radio" name="q9"> &lt;class 'str'&gt;</label>
+          <label><input type="radio" name="q9"> &lt;class 'float'&gt;</label>
+          <label><input type="radio" name="q9"> خطأ</label></div>
+        <div class="question"><h4>10. في المثال العملي، ماذا يفعل السطر: is_passed = student_gpa >= 2.0؟</h4>
+          <label><input type="radio" name="q10"> يخزن قيمة منطقية (True أو False) حسب المعدل</label>
+          <label><input type="radio" name="q10"> يطبع المعدل</label>
+          <label><input type="radio" name="q10"> يحول المعدل إلى نص</label>
+          <label><input type="radio" name="q10"> يحدث خطأ</label></div>
+        <button class="btn-primary" style="margin-top:20px" onclick="alert('تم إرسال إجاباتك!')">تحقق من الإجابات</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:30px">
+        <a href="./lesson-02.html" class="btn-secondary">→ الدرس السابق</a>
+        <a href="./index.html" class="btn-primary">كل الدروس ←</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الدرس 02: print و input | Medo El Jan</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    html, body { background: #0a0e17 !important; color: #f1f5f9 !important; font-family: Cairo, Tahoma, Arial, sans-serif; direction: rtl; margin: 0; }
+    a { color: #00d4ff; }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="logo-icon">&lt;/&gt;</span><span class="logo-text">Medo El Jan</span></div>
+    <nav class="sidebar-nav">
+      <a href="./index.html" class="nav-item"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
+      <a href="./programming.html" class="nav-item"><i class="fas fa-code"></i> <span>عالم البرمجة</span></a>
+      <a href="./index.html" class="nav-item active"><i class="fas fa-book"></i> <span>دروس Python</span></a>
+    </nav>
+  </aside>
+  <div class="main-wrapper">
+    <header class="top-header">
+      <div class="user-info"><div class="user-avatar">م</div><div><div class="user-name">Medo Eljan</div></div></div>
+    </header>
+    <div class="lesson-page">
+      <div class="lesson-header">
+        <h1>الدرس 02: أول برنامج لك + دالة print و input</h1>
+        <div class="meta"><span>🐍 Python</span><span>⏱️ 25 دقيقة</span><span>📊 مبتدئ</span><span>📝 10 أسئلة</span></div>
+      </div>
+      <div class="lesson-content">
+        <p>في هذا الدرس سنكتب أول برامجنا الحقيقية ونتعلم أهم دالتين للمبتدئين: print لطباعة النتائج، و input لاستقبال بيانات من المستخدم.</p>
+
+        <h2>1. دالة print</h2>
+        <p>دالة print تستخدم لعرض أي شيء على الشاشة. يمكنك طباعة نصوص، أرقام، أو حتى نتائج عمليات حسابية.</p>
+        <pre>print("مرحباً بك في Medo El Jan")
+print(100)
+print(50 + 30)
+print("النتيجة =", 50 + 30)</pre>
+        <p>لاحظ أنك تستطيع طباعة أكثر من قيمة في نفس السطر بفصلها بفاصلة.</p>
+
+        <h2>2. النصوص (Strings)</h2>
+        <p>أي كلام تضعه بين علامتي اقتباس " " أو ' ' يعتبر نصاً (String). يمكنك دمج النصوص معاً باستخدام علامة +.</p>
+        <pre>name = "أحمد"
+print("أهلاً " + name)
+print("أهلاً", name)  # طريقة أخرى</pre>
+
+        <h2>3. دالة input</h2>
+        <p>دالة input تسمح للمستخدم بإدخال بيانات أثناء تشغيل البرنامج. دائماً ما تُرجع القيمة كنص (string).</p>
+        <pre>name = input("ما اسمك؟ ")
+print("مرحباً بك يا", name)</pre>
+        <p>عندما تشغّل هذا الكود سيتوقف البرنامج وينتظر منك كتابة اسمك ثم الضغط على Enter.</p>
+
+        <h2>4. تحويل أنواع البيانات</h2>
+        <p>بما أن input دائماً يرجع نصاً، إذا أردت استخدام الرقم في عمليات حسابية يجب تحويله:</p>
+        <pre>age = input("كم عمرك؟ ")
+age = int(age)  # تحويل من نص إلى رقم صحيح
+print("بعد 5 سنين سيكون عمرك", age + 5)</pre>
+        <p>يمكنك استخدام int() للأرقام الصحيحة، و float() للأرقام العشرية.</p>
+
+        <h2>5. مثال كامل</h2>
+        <pre>print("=== برنامج الترحيب ===")
+name = input("اكتب اسمك: ")
+age = int(input("اكتب عمرك: "))
+print("--------------------")
+print("أهلاً وسهلاً", name)
+print("عمرك الحالي:", age)
+print("بعد 10 سنوات سيكون عمرك:", age + 10)
+print("شكراً لاستخدامك برنامج Medo El Jan")</pre>
+
+        <h2>ملخص</h2>
+        <p>تعلمنا كيف نطبع معلومات على الشاشة باستخدام print، وكيف نستقبل بيانات من المستخدم باستخدام input، وكيفية تحويل النصوص إلى أرقام. هذه المهارات أساسية جداً في كل البرامج القادمة.</p>
+      </div>
+
+      <div class="questions-section">
+        <h2>📝 الأسئلة (10 أسئلة)</h2>
+        <div class="question"><h4>1. ما هي الدالة المستخدمة لطباعة نص على الشاشة؟</h4>
+          <label><input type="radio" name="q1"> input</label>
+          <label><input type="radio" name="q1"> print</label>
+          <label><input type="radio" name="q1"> write</label>
+          <label><input type="radio" name="q1"> show</label></div>
+        <div class="question"><h4>2. ماذا تُرجع دالة input دائماً؟</h4>
+          <label><input type="radio" name="q2"> رقم صحيح</label>
+          <label><input type="radio" name="q2"> نص (string)</label>
+          <label><input type="radio" name="q2"> قيمة منطقية</label>
+          <label><input type="radio" name="q2"> قائمة</label></div>
+        <div class="question"><h4>3. كيف تحول النص القادم من input إلى رقم صحيح؟</h4>
+          <label><input type="radio" name="q3"> str()</label>
+          <label><input type="radio" name="q3"> int()</label>
+          <label><input type="radio" name="q3"> float()</label>
+          <label><input type="radio" name="q3"> bool()</label></div>
+        <div class="question"><h4>4. أي سطر صحيح لطباعة "مرحبا"؟</h4>
+          <label><input type="radio" name="q4"> print مرحبا</label>
+          <label><input type="radio" name="q4"> print("مرحبا")</label>
+          <label><input type="radio" name="q4"> print[مرحبا]</label>
+          <label><input type="radio" name="q4"> echo("مرحبا")</label></div>
+        <div class="question"><h4>5. ماذا يحدث إذا كتبت: print(10 + 5)؟</h4>
+          <label><input type="radio" name="q5"> يطبع 10 + 5</label>
+          <label><input type="radio" name="q5"> يطبع 15</label>
+          <label><input type="radio" name="q5"> يحدث خطأ</label>
+          <label><input type="radio" name="q5"> لا يطبع شيئاً</label></div>
+        <div class="question"><h4>6. كيف تدمج نصين معاً؟</h4>
+          <label><input type="radio" name="q6"> باستخدام +</label>
+          <label><input type="radio" name="q6"> باستخدام -</label>
+          <label><input type="radio" name="q6"> باستخدام *</label>
+          <label><input type="radio" name="q6"> لا يمكن</label></div>
+        <div class="question"><h4>7. ما نتيجة الكود: print("عمري", 20)؟</h4>
+          <label><input type="radio" name="q7"> عمري20</label>
+          <label><input type="radio" name="q7"> عمري 20</label>
+          <label><input type="radio" name="q7"> خطأ</label>
+          <label><input type="radio" name="q7"> 20 عمري</label></div>
+        <div class="question"><h4>8. لماذا نستخدم int() مع input عند التعامل مع الأعمار؟</h4>
+          <label><input type="radio" name="q8"> لأن input يرجع نصاً ولا يمكن جمعه مع رقم مباشرة</label>
+          <label><input type="radio" name="q8"> لأن int أجمل شكلاً</label>
+          <label><input type="radio" name="q8"> لا داعي لها</label>
+          <label><input type="radio" name="q8"> لأنها تجعل البرنامج أسرع</label></div>
+        <div class="question"><h4>9. أي من التالي يحول النص إلى رقم عشري؟</h4>
+          <label><input type="radio" name="q9"> int()</label>
+          <label><input type="radio" name="q9"> float()</label>
+          <label><input type="radio" name="q9"> str()</label>
+          <label><input type="radio" name="q9"> decimal()</label></div>
+        <div class="question"><h4>10. في المثال الكامل، ماذا يفعل السطر: age = int(input("اكتب عمرك: "))؟</h4>
+          <label><input type="radio" name="q10"> يطبع العمر فقط</label>
+          <label><input type="radio" name="q10"> يطلب العمر ويحوله إلى رقم صحيح ويخزنه في متغير age</label>
+          <label><input type="radio" name="q10"> يحدث خطأ دائماً</label>
+          <label><input type="radio" name="q10"> يحفظ العمر كنص</label></div>
+        <button class="btn-primary" style="margin-top:20px" onclick="alert('تم إرسال إجاباتك!')">تحقق من الإجابات</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:30px">
+        <a href="./lesson-01.html" class="btn-secondary">→ الدرس السابق</a>
+        <a href="./lesson-03.html" class="btn-primary">الدرس التالي ←</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
