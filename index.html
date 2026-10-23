@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medo El Jan | منصة التعلم</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+/* Medo El Jan - High Fidelity Dark Neon UI */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #060b14;
+  --bg-card: rgba(15, 23, 42, 0.85);
+  --bg-card-solid: #0f172a;
+  --neon-cyan: #00e5ff;
+  --neon-blue: #3b82f6;
+  --neon-purple: #a855f7;
+  --neon-pink: #ec4899;
+  --neon-green: #22c55e;
+  --neon-orange: #f59e0b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.12);
+  --sidebar-w: 210px;
+  --radius: 18px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  font-family: 'Cairo', Tahoma, sans-serif;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  direction: rtl;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  position: fixed; top: 0; right: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: linear-gradient(180deg, #0b1220 0%, #050a12 100%);
+  border-left: 1px solid var(--border);
+  display: flex; flex-direction: column; z-index: 1000; padding: 18px 0;
+}
+.sidebar-logo {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 18px 20px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+}
+.sidebar-logo .logo-icon {
+  font-size: 26px; font-weight: 800;
+  background: linear-gradient(135deg, #00e5ff, #a855f7);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sidebar-logo .logo-text {
+  font-size: 18px; font-weight: 700;
+  background: linear-gradient(90deg, #00e5ff, #a855f7);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 0 10px; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px; border-radius: 12px;
+  color: var(--text-muted); text-decoration: none;
+  font-size: 14px; font-weight: 500; transition: all 0.2s;
+}
+.nav-item:hover { background: rgba(0, 229, 255, 0.08); color: var(--neon-cyan); }
+.nav-item.active {
+  background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), transparent);
+  color: var(--neon-cyan); border-right: 3px solid var(--neon-cyan);
+}
+.nav-item i { width: 22px; text-align: center; font-size: 16px; }
+.sidebar-bottom {
+  padding: 16px; border-top: 1px solid var(--border);
+  text-align: center; font-size: 12px; color: var(--text-muted); line-height: 1.5;
+}
+.sidebar-bottom .rocket { font-size: 28px; margin-bottom: 6px; }
+
+.main-wrapper { margin-right: var(--sidebar-w); min-height: 100vh; display: flex; flex-direction: column; }
+
+.top-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 28px;
+  background: rgba(6, 11, 20, 0.85); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+}
+.user-info { display: flex; align-items: center; gap: 10px; }
+.user-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, #00e5ff, #a855f7);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px;
+}
+.user-name { font-size: 13px; font-weight: 600; }
+.user-badge { font-size: 10px; background: rgba(168, 85, 247, 0.2); color: var(--neon-purple); padding: 2px 8px; border-radius: 20px; }
+.search-box {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border);
+  border-radius: 50px; padding: 7px 16px; width: 300px;
+}
+.search-box input {
+  background: none; border: none; outline: none;
+  color: var(--text); font-family: inherit; font-size: 13px; width: 100%;
+}
+.search-box input::placeholder { color: var(--text-muted); }
+.header-actions { display: flex; gap: 14px; }
+.header-actions button { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
+.header-actions button:hover { color: var(--neon-cyan); }
+
+.hero {
+  position: relative; height: 360px; overflow: hidden;
+  display: flex; align-items: center; padding: 0 48px;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(0, 229, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 75% 30%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 60% 80%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #060b14 0%, #0a1220 100%);
+}
+.hero-content { position: relative; z-index: 2; max-width: 560px; }
+.hero-content h1 {
+  font-size: 40px; font-weight: 800; line-height: 1.25; margin-bottom: 10px;
+  background: linear-gradient(90deg, #ffffff 30%, #00e5ff 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-content .subtitle { font-size: 16px; color: var(--text-muted); margin-bottom: 6px; }
+.hero-tags { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 22px; }
+.hero-tags span {
+  background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.25);
+  color: var(--neon-cyan); padding: 4px 12px; border-radius: 20px; font-size: 12px;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(90deg, #a855f7, #ec4899); color: #fff;
+  padding: 11px 26px; border-radius: 50px; font-size: 15px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  box-shadow: 0 4px 24px rgba(168, 85, 247, 0.45); transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(168, 85, 247, 0.6); }
+.btn-green { background: linear-gradient(90deg, #22c55e, #16a34a); box-shadow: 0 4px 24px rgba(34, 197, 94, 0.4); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--neon-cyan); padding: 8px 18px; border-radius: 50px;
+  font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s;
+}
+.btn-secondary:hover { background: rgba(0, 229, 255, 0.15); }
+.hero-visual {
+  position: absolute; left: 6%; top: 50%; transform: translateY(-50%);
+  width: 260px; height: 260px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.18) 0%, transparent 70%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 72px; color: var(--neon-cyan); opacity: 0.85;
+  filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.3));
+}
+
+.content-area { padding: 28px; flex: 1; }
+.section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 22px; }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px; backdrop-filter: blur(12px); transition: border-color 0.25s, box-shadow 0.25s;
+}
+.card:hover { border-color: rgba(0, 229, 255, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35); }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.card-header h2 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.card-header .badge { background: rgba(0, 229, 255, 0.12); color: var(--neon-cyan); font-size: 11px; padding: 3px 10px; border-radius: 20px; }
+.card p { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 14px; }
+
+.lang-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+.lang-pill {
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border);
+  padding: 5px 11px; border-radius: 8px; font-size: 12px; color: var(--text);
+  text-decoration: none; transition: all 0.2s;
+}
+.lang-pill:hover { border-color: var(--neon-cyan); background: rgba(0, 229, 255, 0.08); }
+
+.finance-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+.finance-item {
+  background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 8px; text-align: center; transition: all 0.2s; cursor: pointer;
+}
+.finance-item:hover { border-color: var(--neon-green); background: rgba(34, 197, 94, 0.07); }
+.finance-item .icon { font-size: 24px; margin-bottom: 6px; }
+.finance-item h4 { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.finance-item p { font-size: 10px; color: var(--text-muted); margin: 0; }
+
+.bottom-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 18px; margin-bottom: 22px; }
+
+.code-editor { background: #0d1117; border-radius: 12px; overflow: hidden; border: 1px solid #21262d; }
+.code-tabs { display: flex; gap: 6px; background: #161b22; padding: 7px 12px; }
+.code-tab { padding: 3px 11px; border-radius: 6px; font-size: 12px; cursor: pointer; color: var(--text-muted); }
+.code-tab.active { background: rgba(0, 229, 255, 0.12); color: var(--neon-cyan); }
+.code-body { display: flex; min-height: 160px; }
+.code-lines {
+  background: #0d1117; padding: 10px 6px; color: #484f58;
+  font-family: 'Courier New', monospace; font-size: 12px; text-align: left; direction: ltr; user-select: none; line-height: 1.6;
+}
+.code-content {
+  flex: 1; padding: 10px; font-family: 'Courier New', monospace; font-size: 12px; color: #e6edf3;
+  direction: ltr; text-align: left; white-space: pre; overflow-x: auto; line-height: 1.6;
+}
+.code-output {
+  width: 38%; background: #0d1117; border-right: 1px solid #21262d; padding: 10px;
+  font-family: 'Courier New', monospace; font-size: 12px; color: #7ee787; direction: ltr; text-align: left; line-height: 1.6;
+}
+.code-run { display: flex; justify-content: flex-end; padding: 8px 12px; background: #161b22; }
+.btn-run {
+  background: var(--neon-green); color: #0d1117; border: none; padding: 5px 16px; border-radius: 6px;
+  font-weight: 600; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+}
+
+.challenge-card { text-align: center; }
+.challenge-card .trophy { font-size: 42px; margin-bottom: 8px; }
+.challenge-card h3 { font-size: 16px; margin-bottom: 6px; }
+.challenge-card p { font-size: 12px; margin-bottom: 12px; }
+.challenge-meta { display: flex; justify-content: center; gap: 16px; margin-bottom: 14px; font-size: 11px; color: var(--text-muted); }
+
+.progress-circle {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: conic-gradient(var(--neon-green) 0% 45%, #1e293b 45% 100%);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; position: relative;
+}
+.progress-circle::before {
+  content: ''; width: 68px; height: 68px; border-radius: 50%;
+  background: var(--bg-card-solid); position: absolute;
+}
+.progress-circle span { position: relative; font-size: 20px; font-weight: 700; color: var(--neon-green); }
+.progress-stats { display: flex; flex-direction: column; gap: 8px; }
+.progress-stat { display: flex; justify-content: space-between; font-size: 12px; }
+.progress-stat .value { font-weight: 600; color: var(--neon-cyan); }
+
+.lang-paths { display: flex; gap: 10px; overflow-x: auto; padding: 8px 0 18px; scrollbar-width: thin; }
+.lang-card {
+  min-width: 100px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s;
+  text-decoration: none; color: inherit; flex-shrink: 0;
+}
+.lang-card:hover, .lang-card.active { border-color: var(--neon-cyan); background: rgba(0, 229, 255, 0.07); transform: translateY(-3px); }
+.lang-card .lang-icon { font-size: 28px; margin-bottom: 6px; }
+.lang-card h4 { font-size: 12px; font-weight: 600; }
+.lang-card small { font-size: 10px; color: var(--text-muted); }
+
+.lessons-list { display: grid; gap: 10px; }
+.lesson-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 18px; transition: all 0.2s; text-decoration: none; color: inherit;
+}
+.lesson-item:hover { border-color: var(--neon-cyan); background: rgba(0, 229, 255, 0.04); }
+.lesson-num {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: rgba(0, 229, 255, 0.1); color: var(--neon-cyan);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;
+}
+.lesson-info { flex: 1; }
+.lesson-info h4 { font-size: 14px; margin-bottom: 3px; }
+.lesson-info p { font-size: 11px; color: var(--text-muted); margin: 0; }
+.lesson-meta { display: flex; gap: 12px; font-size: 11px; color: var(--text-muted); }
+
+.finance-topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 26px; }
+.topic-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 18px 12px; text-align: center; transition: all 0.2s; cursor: pointer;
+  text-decoration: none; color: inherit;
+}
+.topic-card:hover { border-color: var(--neon-green); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(34, 197, 94, 0.12); }
+.topic-card .icon { font-size: 28px; margin-bottom: 8px; }
+.topic-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.topic-card p { font-size: 11px; color: var(--text-muted); margin: 0; }
+
+.widgets-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 22px; }
+.widget { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+.widget h3 { font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+
+.lesson-page { max-width: 880px; margin: 0 auto; padding: 28px; }
+.lesson-header { margin-bottom: 24px; }
+.lesson-header h1 { font-size: 26px; margin-bottom: 6px; }
+.lesson-header .meta { display: flex; gap: 16px; color: var(--text-muted); font-size: 13px; }
+.lesson-content {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 28px; margin-bottom: 24px; line-height: 1.85; font-size: 15px;
+}
+.lesson-content h2 { color: var(--neon-cyan); margin: 20px 0 10px; font-size: 18px; }
+.lesson-content h3 { color: var(--neon-purple); margin: 16px 0 8px; font-size: 16px; }
+.lesson-content pre {
+  background: #0d1117; padding: 14px; border-radius: 10px; direction: ltr; text-align: left;
+  overflow-x: auto; margin: 14px 0; font-family: 'Courier New', monospace; font-size: 13px;
+  border: 1px solid #21262d; line-height: 1.5;
+}
+.lesson-content code {
+  background: rgba(0, 229, 255, 0.1); padding: 1px 5px; border-radius: 4px;
+  font-family: 'Courier New', monospace; font-size: 13px; color: var(--neon-cyan);
+}
+.questions-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+.questions-section h2 { margin-bottom: 18px; color: var(--neon-orange); }
+.question { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.question:last-child { border-bottom: none; }
+.question h4 { margin-bottom: 10px; font-size: 14px; }
+.question label {
+  display: block; padding: 7px 12px; background: rgba(15, 23, 42, 0.7); border-radius: 8px;
+  margin-bottom: 6px; cursor: pointer; transition: all 0.15s; font-size: 13px;
+}
+.question label:hover { background: rgba(0, 229, 255, 0.08); }
+.question input[type="radio"] { margin-left: 8px; }
+
+.site-footer { background: #030712; border-top: 1px solid var(--border); padding: 24px; text-align: center; }
+.footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 14px; flex-wrap: wrap; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+.footer-links a:hover { color: var(--neon-cyan); }
+.footer-contact { display: flex; justify-content: center; gap: 20px; margin-bottom: 12px; flex-wrap: wrap; font-size: 13px; }
+.footer-contact a { color: var(--neon-cyan); text-decoration: none; }
+.footer-copy { color: var(--text-muted); font-size: 12px; }
+
+@media (max-width: 1100px) {
+  .section-grid, .bottom-grid, .widgets-row { grid-template-columns: 1fr; }
+  .finance-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-visual { display: none; }
+}
+@media (max-width: 768px) {
+  .sidebar { width: 64px; }
+  .sidebar-logo .logo-text, .nav-item span, .sidebar-bottom p { display: none; }
+  .main-wrapper { margin-right: 64px; }
+  .search-box { width: 160px; }
+  .hero { padding: 0 18px; height: 280px; }
+  .hero-content h1 { font-size: 26px; }
+  .content-area { padding: 14px; }
+}
+
+  /* Extra for single-page */
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+  .sidebar { z-index: 1001; }
+  </style>
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">&lt;/&gt;</span>
+      <span class="logo-text">Medo El Jan</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="home"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
+      <a href="#" class="nav-item" data-page="programming"><i class="fas fa-code"></i> <span>عالم البرمجة</span></a>
+      <a href="#" class="nav-item" data-page="finance"><i class="fas fa-coins"></i> <span>الثقافة المالية</span></a>
+      <a href="#" class="nav-item" data-page="python"><i class="fas fa-book"></i> <span>دروس Python</span></a>
+      <a href="#" class="nav-item" data-page="lesson1"><i class="fas fa-play"></i> <span>درس 01</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="rocket">🚀</div>
+      <p>أحلامك تبدأ من هنا<br>تعلم .. طوّر .. اصنع مستقبلك</p>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <header class="top-header">
+      <div class="user-info">
+        <div class="user-avatar">م</div>
+        <div>
+          <div class="user-name">Medo Eljan</div>
+          <span class="user-badge">مبتدئ</span>
+        </div>
+      </div>
+      <div class="search-box">
+        <i class="fas fa-search" style="color:var(--text-muted)"></i>
+        <input type="text" placeholder="ابحث عن دورة، لغة أو تقنية...">
+      </div>
+      <div class="header-actions">
+        <button><i class="fas fa-bell"></i></button>
+        <button><i class="fas fa-moon"></i></button>
+      </div>
+    </header>
+
+    <!-- ==================== HOME ==================== -->
+    <div id="page-home" class="page-section active">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>ابدأ رحلتك من سطر كود</h1>
+          <p class="subtitle">تعلم • تدرب • ابنِ مشاريع حقيقية</p>
+          <p class="subtitle" style="font-size:15px;color:var(--neon-cyan)">كل هذا وأكثر .. مجاناً</p>
+          <div class="hero-tags">
+            <span>دعم دائم</span>
+            <span>مشاريع حقيقية</span>
+            <span>تعلم عملي</span>
+          </div>
+          <a href="#" class="btn-primary" data-page="programming">ادخل عالم البرمجة ←</a>
+        </div>
+        <div class="hero-visual"><i class="fas fa-code"></i></div>
+      </section>
+
+      <div class="content-area">
+        <div class="section-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fas fa-laptop-code" style="color:var(--neon-cyan)"></i> عالم البرمجة</h2>
+              <span class="badge">20 لغة وتقنية</span>
+            </div>
+            <p>من الأساسيات إلى الاحتراف .. تعلم البرمجة بلغات وتقنيات متعددة مع شروحات مبسطة وتمارين عملية ومشاريع حقيقية.</p>
+            <div class="lang-pills">
+              <a href="#" class="lang-pill" data-page="python"><span>🐍</span> Python</a>
+              <a href="#" class="lang-pill"><span>🟨</span> JavaScript</a>
+              <a href="#" class="lang-pill"><span>🟧</span> HTML</a>
+              <a href="#" class="lang-pill"><span>🔵</span> CSS</a>
+              <a href="#" class="lang-pill"><span>🔵</span> C++</a>
+              <a href="#" class="lang-pill"><span>☕</span> Java</a>
+              <a href="#" class="lang-pill"><span>🐘</span> PHP</a>
+              <a href="#" class="lang-pill"><span>🐹</span> Go</a>
+              <a href="#" class="lang-pill"><span>🦀</span> Rust</a>
+              <a href="#" class="lang-pill"><span>🟣</span> Kotlin</a>
+              <a href="#" class="lang-pill"><span>🐦</span> Swift</a>
+              <a href="#" class="lang-pill"><span>🟢</span> C#</a>
+              <a href="#" class="lang-pill"><span>🔷</span> TypeScript</a>
+              <a href="#" class="lang-pill"><span>💎</span> Ruby</a>
+              <a href="#" class="lang-pill"><span>💻</span> Bash</a>
+              <a href="#" class="lang-pill"><span>🐧</span> Linux</a>
+              <a href="#" class="lang-pill"><span>⚛️</span> React</a>
+              <a href="#" class="lang-pill"><span>🟢</span> Node.js</a>
+              <a href="#" class="lang-pill"><span>🗄️</span> SQL</a>
+              <a href="#" class="lang-pill"><span>📦</span> Git</a>
+            </div>
+            <a href="#" class="btn-secondary" data-page="programming">عرض جميع اللغات ←</a>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fas fa-chart-line" style="color:var(--neon-green)"></i> الثقافة المالية</h2>
+              <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">افهم فلوسك</span>
+            </div>
+            <p>تعلم كيف تدير أموالك، وتزيد دخلك، وتستثمر بذكاء مع مبادئ الاستثمار الحلال والتمويل الإسلامي.</p>
+            <div class="finance-grid">
+              <div class="finance-item"><div class="icon">💰</div><h4>إدارة الميزانية</h4><p>خطط لمصروفاتك</p></div>
+              <div class="finance-item"><div class="icon">🐷</div><h4>الادخار</h4><p>استعد لمستقبلك</p></div>
+              <div class="finance-item"><div class="icon">📈</div><h4>مصادر الدخل</h4><p>طرق لزيادة دخلك</p></div>
+              <div class="finance-item"><div class="icon">🕌</div><h4>الاستثمار الحلال</h4><p>تعلم الاستثمار الشرعي</p></div>
+            </div>
+            <a href="#" class="btn-secondary" data-page="finance">عرض المزيد ←</a>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="card">
+            <div class="card-header"><h2><i class="fas fa-terminal"></i> مختبر الكود</h2></div>
+            <div class="code-editor">
+              <div class="code-tabs"><span class="code-tab active">Python</span><span class="code-tab">JavaScript</span></div>
+              <div class="code-body">
+                <div class="code-lines">1<br>2<br>3</div>
+                <div class="code-content">print("مرحباً بك في Medo El Jan")
+name = input("ما اسمك؟ ")
+print(f"أهلاً {name} هنا تبدأ رحلتك!")</div>
+                <div class="code-output">النتيجة
+مرحباً بك في Medo El Jan
+ما اسمك؟
+أهلاً بك هنا تبدأ رحلتك!</div>
+              </div>
+              <div class="code-run"><button class="btn-run"><i class="fas fa-play"></i> تشغيل</button></div>
+            </div>
+          </div>
+          <div class="card challenge-card">
+            <div class="trophy">🏆</div>
+            <h3>تحدي اليوم</h3>
+            <p>اكتب برنامج بايثون لحساب مجموع الأرقام من 1 إلى 100</p>
+            <div class="challenge-meta"><span>⭐ 50 نقطة</span><span>📊 متوسط</span><span>⏱️ 15 د</span></div>
+            <a href="#" class="btn-primary" data-page="python" style="font-size:14px;padding:10px 20px">ابدأ التحدي ←</a>
+          </div>
+          <div class="card">
+            <div class="card-header"><h2><i class="fas fa-chart-pie"></i> تقدمي</h2></div>
+            <div class="progress-circle"><span>45%</span></div>
+            <div class="progress-stats">
+              <div class="progress-stat"><span>الدروس</span><span class="value">3 ✓</span></div>
+              <div class="progress-stat"><span>المشاريع</span><span class="value">5 📁</span></div>
+              <div class="progress-stat"><span>النقاط</span><span class="value">120 ⭐</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PROGRAMMING ==================== -->
+    <div id="page-programming" class="page-section">
+      <section class="hero" style="height:300px">
+        <div class="hero-content">
+          <h1>عالم البرمجة</h1>
+          <p class="subtitle">ابدأ من الصفر.. واكتب أول سطر كود</p>
+          <div class="hero-tags"><span>دعم دائم</span><span>مشاريع حقيقية</span><span>تعلم عملي</span></div>
+          <a href="#" class="btn-primary" data-page="python">ابدأ رحلتك ←</a>
+        </div>
+        <div class="hero-visual"><i class="fas fa-laptop-code"></i></div>
+      </section>
+      <div class="content-area">
+        <h2 style="margin-bottom:8px;font-size:18px"><i class="fas fa-road" style="color:var(--neon-cyan)"></i> مسارات لغات البرمجة — 20 لغة</h2>
+        <div class="lang-paths">
+          <a href="#" class="lang-card active" data-page="python"><div class="lang-icon">🐍</div><h4>Python</h4><small>40 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🟨</div><h4>JavaScript</h4><small>25 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🟧</div><h4>HTML & CSS</h4><small>20 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🔵</div><h4>C++</h4><small>30 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">☕</div><h4>Java</h4><small>28 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🐘</div><h4>PHP</h4><small>22 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🟣</div><h4>Kotlin</h4><small>18 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🐹</div><h4>Go</h4><small>20 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🦀</div><h4>Rust</h4><small>24 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🐧</div><h4>Linux</h4><small>15 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🗄️</div><h4>SQL</h4><small>16 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🟢</div><h4>Node.js</h4><small>20 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🐦</div><h4>Swift</h4><small>18 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🟢</div><h4>C#</h4><small>22 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">🔷</div><h4>TypeScript</h4><small>18 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">💎</div><h4>Ruby</h4><small>16 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">💻</div><h4>Bash</h4><small>12 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">⚛️</div><h4>React</h4><small>25 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">📦</div><h4>Git</h4><small>10 درس</small></a>
+          <a href="#" class="lang-card"><div class="lang-icon">📱</div><h4>Flutter</h4><small>20 درس</small></a>
+        </div>
+        <div style="margin-top:20px">
+          <a href="#" class="btn-primary" data-page="python">ابدأ دروس Python (40 درس) ←</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== FINANCE ==================== -->
+    <div id="page-finance" class="page-section">
+      <section class="hero" style="height:300px;background:radial-gradient(ellipse at 40% 50%,rgba(34,197,94,0.12) 0%,transparent 50%),linear-gradient(180deg,#060b14 0%,#0a1220 100%)">
+        <div class="hero-content">
+          <h1 style="background:linear-gradient(90deg,#fff,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent">عالم الثقافة المالية</h1>
+          <p class="subtitle">افهم فلوسك وابنِ مستقبلك</p>
+          <p style="color:var(--text-muted);font-size:14px;margin:8px 0 16px">تعلم كيف تدير مصروفك .. ادخر بذكاء .. استثمر بوعي</p>
+          <a href="#fin-lessons" class="btn-primary btn-green">ابدأ رحلتك الآن ←</a>
+        </div>
+        <div class="hero-visual" style="color:var(--neon-green)"><i class="fas fa-chart-line"></i></div>
+      </section>
+      <div class="content-area">
+        <div class="finance-topics">
+          <div class="topic-card"><div class="icon">🛡️</div><h4>احذر الاحتيال</h4><p>احمِ نفسك من النصب</p></div>
+          <div class="topic-card"><div class="icon">⚠️</div><h4>فهم المخاطر</h4><p>تعرف على المخاطر المالية</p></div>
+          <div class="topic-card"><div class="icon">🕌</div><h4>التمويل الإسلامي</h4><p>حلول متوافقة مع الشريعة</p></div>
+          <div class="topic-card"><div class="icon">📊</div><h4>الاستثمار المسؤول</h4><p>استثمر بذكاء</p></div>
+          <div class="topic-card"><div class="icon">💵</div><h4>مصادر الدخل</h4><p>طرق زيادة دخلك</p></div>
+          <div class="topic-card"><div class="icon">📋</div><h4>الميزانية</h4><p>خطط لمصاريفك</p></div>
+          <div class="topic-card"><div class="icon">👛</div><h4>إدارة المصروف</h4><p>تحكم في أموالك</p></div>
+        </div>
+        <div id="fin-lessons">
+          <h2 style="margin-bottom:16px"><i class="fas fa-book-open" style="color:var(--neon-green)"></i> دروس الثقافة المالية</h2>
+          <div class="lessons-list">
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">01</div><div class="lesson-info"><h4>مقدمة في الثقافة المالية</h4><p>لماذا يجب أن تتعلم إدارة أموالك</p></div></div>
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">02</div><div class="lesson-info"><h4>كيف تبدأ تحافظ على فلوسك (الادخار)</h4><p>قواعد الادخار الذهبية وقاعدة 50/30/20</p></div></div>
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">03</div><div class="lesson-info"><h4>إدارة الميزانية الشخصية</h4><p>كيف تسجل دخلك ومصروفاتك</p></div></div>
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">04</div><div class="lesson-info"><h4>إزاي تبدأ تستثمر فلوسك</h4><p>مفهوم الاستثمار وأول خطواتك</p></div></div>
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">05</div><div class="lesson-info"><h4>الاستثمار في الأسهم للمبتدئين</h4><p>ما هي الأسهم وكيف تشتري</p></div></div>
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">06</div><div class="lesson-info"><h4>مصادر الدخل الإضافي</h4><p>فريلانس وبيع منتجات</p></div></div>
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">07</div><div class="lesson-info"><h4>الاستثمار الحلال والتمويل الإسلامي</h4><p>مبادئ الشريعة والصكوك</p></div></div>
+            <div class="lesson-item"><div class="lesson-num" style="background:rgba(34,197,94,0.15);color:var(--neon-green)">08</div><div class="lesson-info"><h4>احذر الاحتيال والنصب المالي</h4><p>أشهر طرق الاحتيال وكيف تحمي نفسك</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PYTHON LESSONS LIST ==================== -->
+    <div id="page-python" class="page-section">
+      <div class="content-area">
+        <h1 style="font-size:26px;margin-bottom:6px">🐍 مسار تعلم Python الكامل</h1>
+        <p style="color:var(--text-muted);margin-bottom:20px">40 درس • كل درس ≈ 30 سطر شرح + 10 أسئلة • من الصفر حتى المتقدم</p>
+        <div class="lessons-list">
+          <a href="#" class="lesson-item" data-page="lesson1"><div class="lesson-num">01</div><div class="lesson-info"><h4>مقدمة إلى لغة Python وتثبيت البيئة</h4><p>تعرف على بايثون + تثبيت Python و VS Code</p></div><div class="lesson-meta"><span>⏱️ 20 د</span><span>📝 10 أسئلة</span></div></a>
+          <a href="#" class="lesson-item" data-page="lesson2"><div class="lesson-num">02</div><div class="lesson-info"><h4>أول برنامج لك + دالة print و input</h4><p>اكتب أول سطر كود واستقبل مدخلات</p></div><div class="lesson-meta"><span>⏱️ 25 د</span><span>📝 10 أسئلة</span></div></a>
+          <a href="#" class="lesson-item" data-page="lesson3"><div class="lesson-num">03</div><div class="lesson-info"><h4>المتغيرات وأنواع البيانات الأساسية</h4><p>int, float, str, bool</p></div><div class="lesson-meta"><span>⏱️ 30 د</span><span>📝 10 أسئلة</span></div></a>
+          <div class="lesson-item"><div class="lesson-num">04</div><div class="lesson-info"><h4>العمليات الحسابية والمنطقية</h4><p>الجمع والطرح والضرب + and or not</p></div><div class="lesson-meta"><span>⏱️ 25 د</span></div></div>
+          <div class="lesson-item"><div class="lesson-num">05</div><div class="lesson-info"><h4>الجمل الشرطية if / elif / else</h4><p>اتخاذ القرارات في البرنامج</p></div><div class="lesson-meta"><span>⏱️ 30 د</span></div></div>
+          <div class="lesson-item"><div class="lesson-num">06</div><div class="lesson-info"><h4>حلقات التكرار for</h4><p>تكرار الأوامر باستخدام for و range</p></div><div class="lesson-meta"><span>⏱️ 30 د</span></div></div>
+          <div class="lesson-item"><div class="lesson-num">07</div><div class="lesson-info"><h4>حلقات التكرار while</h4><p>التكرار بشرط + break و continue</p></div><div class="lesson-meta"><span>⏱️ 25 د</span></div></div>
+          <div class="lesson-item"><div class="lesson-num">08</div><div class="lesson-info"><h4>القوائم (Lists)</h4><p>إنشاء القوائم والإضافة والحذف</p></div><div class="lesson-meta"><span>⏱️ 35 د</span></div></div>
+          <div class="lesson-item"><div class="lesson-num">09</div><div class="lesson-info"><h4>الـ Tuples والـ Sets</h4><p>الفرق بين القوائم والـ tuples</p></div><div class="lesson-meta"><span>⏱️ 25 د</span></div></div>
+          <div class="lesson-item"><div class="lesson-num">10</div><div class="lesson-info"><h4>القواميس (Dictionaries)</h4><p>تخزين البيانات كمفتاح وقيمة</p></div><div class="lesson-meta"><span>⏱️ 30 د</span></div></div>
+          <p style="text-align:center;color:var(--text-muted);margin-top:16px">... و 30 درس آخر حتى المستوى المتقدم (الدوال، OOP، Flask، مشاريع تخرج)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== LESSON 01 ==================== -->
+    <div id="page-lesson1" class="page-section">
+      <div class="lesson-page">
+        <div class="lesson-header">
+          <h1>الدرس 01: مقدمة إلى لغة Python وتثبيت البيئة</h1>
+          <div class="meta"><span>🐍 Python</span><span>⏱️ 20 دقيقة</span><span>📊 مبتدئ</span><span>📝 10 أسئلة</span></div>
+        </div>
+        <div class="lesson-content">
+          <p>مرحباً بك في أول درس من مسار تعلم لغة Python! في هذا الدرس سنتعرف على اللغة بشكل عام، ونثبت الأدوات اللازمة لنبدأ الكتابة فوراً.</p>
+          <h2>1. ما هي لغة Python؟</h2>
+          <p>Python هي لغة برمجة عالية المستوى، مفسّرة (Interpreted)، وسهلة التعلم. صممها الهولندي جويدو فان روسوم عام 1991، وأصبحت اليوم من أكثر اللغات استخداماً في العالم.</p>
+          <p>تتميز Python بقراءتها الشبيهة باللغة الإنجليزية، مما يجعلها مثالية للمبتدئين وللمحترفين على حد سواء.</p>
+          <h2>2. لماذا نتعلم Python؟</h2>
+          <p>- سهولة التعلم والقراءة<br>- مجتمع ضخم ودعم هائل<br>- تستخدم في: تطوير الويب، تحليل البيانات، الذكاء الاصطناعي، الأتمتة<br>- مكتبات جاهزة تقريباً لكل شيء<br>- مطلوبة بشدة في سوق العمل</p>
+          <h2>3. تثبيت Python</h2>
+          <p>اذهب إلى الموقع الرسمي python.org وحمّل أحدث إصدار مستقر. أثناء التثبيت على ويندوز، تأكد من تفعيل خيار "Add Python to PATH".</p>
+          <pre>python --version</pre>
+          <h2>4. تثبيت محرر الأكواد VS Code</h2>
+          <p>ننصح بشدة باستخدام Visual Studio Code. حمّله من code.visualstudio.com ثم ثبّت إضافة Python الرسمية.</p>
+          <h2>5. أول تجربة</h2>
+          <pre>print("مرحباً بك في عالم Python مع Medo El Jan")</pre>
+          <h2>ملخص الدرس</h2>
+          <p>تعلمنا ما هي Python ولماذا هي مهمة، وكيف نثبتها مع محرر أكواد احترافي. في الدرس القادم سنكتب أول برامجنا الحقيقية.</p>
+        </div>
+        <div class="questions-section">
+          <h2>📝 الأسئلة (10 أسئلة)</h2>
+          <div class="question"><h4>1. من هو مصمم لغة Python؟</h4>
+            <label><input type="radio" name="q1"> بيل جيتس</label>
+            <label><input type="radio" name="q1"> جويدو فان روسوم</label>
+            <label><input type="radio" name="q1"> مارك زوكربيرج</label>
+            <label><input type="radio" name="q1"> لينوس تورفالدس</label></div>
+          <div class="question"><h4>2. في أي عام ظهرت Python لأول مرة؟</h4>
+            <label><input type="radio" name="q2"> 1989</label>
+            <label><input type="radio" name="q2"> 1991</label>
+            <label><input type="radio" name="q2"> 1995</label>
+            <label><input type="radio" name="q2"> 2000</label></div>
+          <div class="question"><h4>3. ما معنى أن Python لغة مفسّرة؟</h4>
+            <label><input type="radio" name="q3"> يتم تحويلها مرة واحدة</label>
+            <label><input type="radio" name="q3"> يتم تنفيذ الكود سطراً سطراً مباشرة</label>
+            <label><input type="radio" name="q3"> تحتاج مترجم خاص</label>
+            <label><input type="radio" name="q3"> لا تعمل إلا على ويندوز</label></div>
+          <div class="question"><h4>4. ما هو الامتداد الرسمي لملفات Python؟</h4>
+            <label><input type="radio" name="q4"> .py</label>
+            <label><input type="radio" name="q4"> .python</label>
+            <label><input type="radio" name="q4"> .pt</label>
+            <label><input type="radio" name="q4"> .js</label></div>
+          <div class="question"><h4>5. ماذا نكتب لطباعة رسالة في Python؟</h4>
+            <label><input type="radio" name="q5"> echo("مرحبا")</label>
+            <label><input type="radio" name="q5"> print("مرحبا")</label>
+            <label><input type="radio" name="q5"> console.log("مرحبا")</label>
+            <label><input type="radio" name="q5"> write("مرحبا")</label></div>
+          <button class="btn-primary" style="margin-top:16px" onclick="alert('تم إرسال إجاباتك!')">تحقق من الإجابات</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:24px">
+          <a href="#" class="btn-secondary" data-page="python">← كل الدروس</a>
+          <a href="#" class="btn-primary" data-page="lesson2">الدرس التالي ←</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== LESSON 02 ==================== -->
+    <div id="page-lesson2" class="page-section">
+      <div class="lesson-page">
+        <div class="lesson-header">
+          <h1>الدرس 02: أول برنامج لك + دالة print و input</h1>
+          <div class="meta"><span>🐍 Python</span><span>⏱️ 25 دقيقة</span><span>📊 مبتدئ</span></div>
+        </div>
+        <div class="lesson-content">
+          <p>في هذا الدرس سنكتب أول برامجنا الحقيقية ونتعلم أهم دالتين: print و input.</p>
+          <h2>1. دالة print</h2>
+          <pre>print("مرحباً بك في Medo El Jan")
+print(100)
+print(50 + 30)</pre>
+          <h2>2. دالة input</h2>
+          <pre>name = input("ما اسمك؟ ")
+print("مرحباً بك يا", name)</pre>
+          <h2>3. تحويل أنواع البيانات</h2>
+          <pre>age = input("كم عمرك؟ ")
+age = int(age)
+print("بعد 5 سنين سيكون عمرك", age + 5)</pre>
+          <h2>4. مثال كامل</h2>
+          <pre>print("=== برنامج الترحيب ===")
+name = input("اكتب اسمك: ")
+age = int(input("اكتب عمرك: "))
+print("أهلاً وسهلاً", name)
+print("عمرك الحالي:", age)
+print("بعد 10 سنوات:", age + 10)</pre>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:24px">
+          <a href="#" class="btn-secondary" data-page="lesson1">→ الدرس السابق</a>
+          <a href="#" class="btn-primary" data-page="lesson3">الدرس التالي ←</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== LESSON 03 ==================== -->
+    <div id="page-lesson3" class="page-section">
+      <div class="lesson-page">
+        <div class="lesson-header">
+          <h1>الدرس 03: المتغيرات وأنواع البيانات الأساسية</h1>
+          <div class="meta"><span>🐍 Python</span><span>⏱️ 30 دقيقة</span><span>📊 مبتدئ</span></div>
+        </div>
+        <div class="lesson-content">
+          <p>المتغيرات هي صناديق نضع فيها البيانات لنستخدمها لاحقاً.</p>
+          <h2>1. ما هو المتغير؟</h2>
+          <pre>name = "Medo"
+age = 25
+height = 1.75
+is_student = True</pre>
+          <h2>2. أنواع البيانات الأساسية</h2>
+          <p><strong>int</strong> (أعداد صحيحة) — <strong>float</strong> (عشرية) — <strong>str</strong> (نصوص) — <strong>bool</strong> (True/False)</p>
+          <h2>3. معرفة النوع</h2>
+          <pre>print(type(100))
+print(type(3.14))
+print(type("نص"))
+print(type(True))</pre>
+          <h2>4. التحويل بين الأنواع</h2>
+          <pre>num_str = "50"
+num_int = int(num_str)
+print(num_int + 10)  # 60</pre>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:24px">
+          <a href="#" class="btn-secondary" data-page="lesson2">→ الدرس السابق</a>
+          <a href="#" class="btn-primary" data-page="python">كل الدروس ←</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-contact">
+        <a href="https://wa.me/message/IDAQMNL3ABVAN1" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
+        <a href="tel:01278977255"><i class="fas fa-phone"></i> 01278977255</a>
+        <a href="mailto:medoeljan7@gmail.com"><i class="fas fa-envelope"></i> medoeljan7@gmail.com</a>
+      </div>
+      <p class="footer-copy">© 2026 Medo El Jan — معاً نبني جيلاً مبدعاً ❤️</p>
+    </footer>
+  </div>
+
+  <script>
+  // Single page navigation
+  function showPage(pageId) {
+    document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + pageId);
+    if (page) page.classList.add('active');
+    
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const nav = document.querySelector('[data-page="'+pageId+'"]');
+    if (nav && nav.classList.contains('nav-item')) nav.classList.add('active');
+    
+    window.scrollTo(0,0);
+  }
+
+  document.querySelectorAll('[data-page]').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      showPage(this.getAttribute('data-page'));
+    });
+  });
+
+  // Run button
+  document.querySelectorAll('.btn-run').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const out = this.closest('.code-editor')?.querySelector('.code-output');
+      if (out) {
+        out.innerHTML = 'جاري التشغيل...\n> تم التنفيذ بنجاح ✓';
+        setTimeout(() => out.innerHTML = 'النتيجة\nمرحباً بك في منصة Medo El Jan\nتم تشغيل الكود بنجاح!', 500);
+      }
+    });
+  });
+  </script>
+</body>
+</html>
